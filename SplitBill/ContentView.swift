@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+extension String {
+  var isInt: Bool {
+    return Int(self) != nil
+  }
+}
+
 struct ContentView: View {
   @State var amount: String = ""
   
@@ -14,15 +20,18 @@ struct ContentView: View {
     NavigationView {
       VStack {
         Form {
-          TextField("Username", text: $amount)
+          TextField("Amount", text: $amount)
+          
           Button(action: {
             // Perform action here
             print("The user entered \(amount)")
           }) {
             Text("Submit Form")
           }
+          .disabled(amount.isEmpty || !amount.isInt)
         }
         .navigationBarTitle("Form")
+        
         Text(amount)
           .padding()
       }
