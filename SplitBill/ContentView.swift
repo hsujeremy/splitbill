@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
+  @State var amount: String = ""
+  
+  var body: some View {
+    NavigationView {
+      VStack {
+        Form {
+          TextField("Username", text: $amount)
+          Button(action: {
+            // Perform action here
+            print("The user entered \(amount)")
+          }) {
+            Text("Submit Form")
+          }
+        }
+        .navigationBarTitle("Form")
+        Text(amount)
+          .padding()
+      }
     }
+  }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }

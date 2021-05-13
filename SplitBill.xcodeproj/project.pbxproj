@@ -13,6 +13,7 @@
 		3FE13259264CA9F300906CE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE13258264CA9F300906CE3 /* Preview Assets.xcassets */; };
 		3FE13264264CA9F300906CE3 /* SplitBillTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE13263264CA9F300906CE3 /* SplitBillTests.swift */; };
 		3FE1326F264CA9F300906CE3 /* SplitBillUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1326E264CA9F300906CE3 /* SplitBillUITests.swift */; };
+		3FE1327D264DA97600906CE3 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1327C264DA97600906CE3 /* Results.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		3FE1326A264CA9F300906CE3 /* SplitBillUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitBillUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE1326E264CA9F300906CE3 /* SplitBillUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitBillUITests.swift; sourceTree = "<group>"; };
 		3FE13270264CA9F300906CE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FE1327C264DA97600906CE3 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				3FE13255264CA9F300906CE3 /* Assets.xcassets */,
 				3FE1325A264CA9F300906CE3 /* Info.plist */,
 				3FE13257264CA9F300906CE3 /* Preview Content */,
+				3FE1327C264DA97600906CE3 /* Results.swift */,
 			);
 			path = SplitBill;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE1327D264DA97600906CE3 /* Results.swift in Sources */,
 				3FE13254264CA9F200906CE3 /* ContentView.swift in Sources */,
 				3FE13252264CA9F200906CE3 /* SplitBillApp.swift in Sources */,
 			);
