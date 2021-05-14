@@ -19,11 +19,12 @@ extension String {
 
 struct ContentView: View {
   @State private var subtotal: String = ""
-  @State private var tip: String = ""
+  @State private var tipPercent: String = ""
+  @State private var tipAmount: Float = 0
   @State private var total: Float = -1
   
   var disableForm: Bool {
-    subtotal.isEmpty || !subtotal.isFloat || tip.isEmpty || !tip.isInt
+    subtotal.isEmpty || !subtotal.isFloat || tipPercent.isEmpty || !tipPercent.isInt
   }
   
   var body: some View {
@@ -32,21 +33,24 @@ struct ContentView: View {
         Form {
           TextField("Amount", text: $subtotal)
           
-          TextField("Tip Percent", text: $tip)
+          TextField("Tip Percent", text: $tipPercent)
           
           Button(action: {
             // Perform action here
             print("The user entered \(subtotal)")
-            total = Float(subtotal)! * (1.0 + Float(tip)! / 100)
+            tipAmount = Float(tipPercent)! / 100 * Float(subtotal)!
+            total = Float(subtotal)! + tipAmount
           }) {
-            Text("Submit Form")
+            Text("Calculate")
           }
           .disabled(disableForm)
         }
-        .navigationBarTitle("Form")
+        .navigationBarTitle("Tip and Total")
         
         if total > -1 {
+          let formattedTip: String = String(format: "%.2f", tipAmount)
           let formattedTotal: String = String(format: "%.2f", total)
+          Text("You will tip $\(formattedTip)")
           Text("Your total is $\(formattedTotal)")
         }
       }
