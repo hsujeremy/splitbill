@@ -32,12 +32,12 @@ struct ContentView: View {
       VStack {
         Form {
           TextField("Amount", text: $subtotal)
+            .keyboardType(.decimalPad)
           
           TextField("Tip Percent", text: $tipPercent)
+            .keyboardType(.decimalPad)
           
           Button(action: {
-            // Perform action here
-            print("The user entered \(subtotal)")
             tipAmount = Float(tipPercent)! / 100 * Float(subtotal)!
             total = Float(subtotal)! + tipAmount
           }) {
