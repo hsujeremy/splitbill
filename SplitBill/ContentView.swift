@@ -23,7 +23,7 @@ struct ContentView: View {
   @State private var tipAmount: Float = 0
   @State private var total: Float = -1
   
-  var disableForm: Bool {
+  var isDisabled: Bool {
     subtotal.isEmpty || !subtotal.isFloat || tipPercent.isEmpty || !tipPercent.isInt
   }
   
@@ -43,15 +43,15 @@ struct ContentView: View {
           }) {
             Text("Calculate")
           }
-          .disabled(disableForm)
+          .disabled(isDisabled)
         }
         .navigationBarTitle("Tip and Total")
         
         if total > -1 {
-          let formattedTip: String = String(format: "%.2f", tipAmount)
-          let formattedTotal: String = String(format: "%.2f", total)
-          Text("You will tip $\(formattedTip)")
-          Text("Your total is $\(formattedTotal)")
+          Results(
+            formattedTip: String(format: "%.2f", tipAmount),
+            formattedTotal: String(format: "%.2f", total)
+          )
         }
       }
     }
