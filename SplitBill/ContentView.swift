@@ -27,6 +27,12 @@ struct ContentView: View {
     subtotal.isEmpty || !subtotal.isFloat || tipPercent.isEmpty || !tipPercent.isInt
   }
   
+  func doSomething(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
+    let tipAmount = tipPercent / 100 * subtotal
+    let total = subtotal + tipAmount
+    return (tipAmount, total)
+  }
+  
   var body: some View {
     NavigationView {
       VStack {
@@ -38,8 +44,9 @@ struct ContentView: View {
             .keyboardType(.decimalPad)
           
           Button(action: {
-            tipAmount = Float(tipPercent)! / 100 * Float(subtotal)!
-            total = Float(subtotal)! + tipAmount
+            let result = doSomething(subtotal: Float(subtotal)!, tipPercent: Float(tipPercent)!)
+            tipAmount = result.tipAmount
+            total = result.total
           }) {
             Text("Calculate")
           }
