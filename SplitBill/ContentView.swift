@@ -27,7 +27,7 @@ struct ContentView: View {
     subtotal.isEmpty || !subtotal.isFloat || tipPercent.isEmpty || !tipPercent.isInt
   }
   
-  func doSomething(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
+  func calculate(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
     let tipAmount = tipPercent / 100 * subtotal
     let total = subtotal + tipAmount
     return (tipAmount, total)
@@ -44,7 +44,7 @@ struct ContentView: View {
             .keyboardType(.decimalPad)
           
           Button(action: {
-            let result = doSomething(subtotal: Float(subtotal)!, tipPercent: Float(tipPercent)!)
+            let result = calculate(subtotal: Float(subtotal)!, tipPercent: Float(tipPercent)!)
             tipAmount = result.tipAmount
             total = result.total
           }) {
