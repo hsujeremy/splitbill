@@ -14,18 +14,28 @@ struct InputForm: View {
     amounts.subtotal.isEmpty ||
     !amounts.subtotal.isFloat ||
     amounts.tipPercent.isEmpty ||
-    !amounts.tipPercent.isInt
+    !amounts.tipPercent.isInt ||
+    amounts.salesTax.isEmpty ||
+    !amounts.salesTax.isInt
   }
   
-  func calculate(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
-    let tipAmount = tipPercent / 100 * subtotal
-    let total = subtotal + tipAmount
+  func calculate(
+    subtotal: Float,
+    salesTax: Float,
+    tipPercent: Float
+  ) -> (tipAmount: Float, total: Float) {
+    let subtotalWithTax = subtotal * (1.0 + salesTax / 100)
+    let tipAmount = tipPercent / 100 * subtotalWithTax
+    let total = subtotalWithTax + tipAmount
     return (tipAmount, total)
   }
   
   var body: some View {
     Form {
       TextField("Amount", text: $amounts.subtotal)
+        .keyboardType(.decimalPad)
+      
+      TextField("Sales Tax", text: $amounts.salesTax)
         .keyboardType(.decimalPad)
 
       TextField("Tip Percent", text: $amounts.tipPercent)
@@ -34,6 +44,7 @@ struct InputForm: View {
       Button(action: {
         let result = calculate(
           subtotal: Float(amounts.subtotal)!,
+          salesTax: Float(amounts.salesTax)!,
           tipPercent: Float(amounts.tipPercent)!
         )
         amounts.tipAmount = result.tipAmount

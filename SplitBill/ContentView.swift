@@ -20,12 +20,14 @@ extension String {
 class Amounts: ObservableObject {
   @Published var subtotal: String
   @Published var tipPercent: String
+  @Published var salesTax: String
   @Published var tipAmount: Float
   @Published var total: Float
   
   init() {
     self.subtotal = ""
     self.tipPercent = ""
+    self.salesTax = ""
     self.tipAmount = 0
     self.total = -1
   }
