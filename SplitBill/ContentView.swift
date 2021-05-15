@@ -17,16 +17,23 @@ extension String {
   }
 }
 
-struct ContentView: View {
-  @State private var subtotal: String = ""
-  @State private var tipPercent: String = ""
-  @State private var tipAmount: Float = 0
-  @State private var total: Float = -1
+class Amounts: ObservableObject {
+  @Published var subtotal: String
+  @Published var tipPercent: String
+  @Published var tipAmount: Float
+  @Published var total: Float
   
-  var isDisabled: Bool {
-    subtotal.isEmpty || !subtotal.isFloat || tipPercent.isEmpty || !tipPercent.isInt
+  init() {
+    self.subtotal = ""
+    self.tipPercent = ""
+    self.tipAmount = 0
+    self.total = -1
   }
-  
+}
+
+struct ContentView: View {
+  @StateObject var amounts = Amounts()
+
   func calculate(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
     let tipAmount = tipPercent / 100 * subtotal
     let total = subtotal + tipAmount
@@ -36,32 +43,18 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       VStack {
-        Form {
-          TextField("Amount", text: $subtotal)
-            .keyboardType(.decimalPad)
-          
-          TextField("Tip Percent", text: $tipPercent)
-            .keyboardType(.decimalPad)
-          
-          Button(action: {
-            let result = calculate(subtotal: Float(subtotal)!, tipPercent: Float(tipPercent)!)
-            tipAmount = result.tipAmount
-            total = result.total
-          }) {
-            Text("Calculate")
-          }
-          .disabled(isDisabled)
-        }
-        .navigationBarTitle("Tip and Total")
+        InputForm()
+          .navigationTitle("Tip and Total")
         
-        if total > -1 {
+        if amounts.total > -1 {
           Results(
-            formattedTip: String(format: "%.2f", tipAmount),
-            formattedTotal: String(format: "%.2f", total)
+            formattedTip: String(format: "%.2f", amounts.tipAmount),
+            formattedTotal: String(format: "%.2f", amounts.total)
           )
         }
       }
     }
+    .environmentObject(amounts)
   }
 }
 
