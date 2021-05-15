@@ -33,12 +33,6 @@ class Amounts: ObservableObject {
 
 struct ContentView: View {
   @StateObject var amounts = Amounts()
-
-  func calculate(subtotal: Float, tipPercent: Float) -> (tipAmount: Float, total: Float) {
-    let tipAmount = tipPercent / 100 * subtotal
-    let total = subtotal + tipAmount
-    return (tipAmount, total)
-  }
   
   var body: some View {
     NavigationView {
